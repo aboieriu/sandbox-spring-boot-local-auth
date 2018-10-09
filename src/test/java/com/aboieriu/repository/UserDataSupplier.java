@@ -18,4 +18,10 @@ public class UserDataSupplier {
 
 		return user;
 	}
+
+	public static User generateRandomUserWithId(){
+		User user =generateRandomUser();
+		user.setId(UUID.randomUUID().toString());
+		return user;
+	}
 }

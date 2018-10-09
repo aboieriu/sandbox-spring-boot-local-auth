@@ -13,11 +13,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -42,15 +42,18 @@ public class AuthenticationEndpointTest {
 
 	@Test
 	public void testGetUserList(){
-		UserAuthRequestDto test = new UserAuthRequestDto("aa", "bbb");
+		UserAuthRequestDto inputData = new UserAuthRequestDto("aa", "bbb");
 
-		AuthResponseDto expectedResponse =new AuthResponseDto(new UserDto(UUID.randomUUID().toString(), test.getUsername(), null, null), UUID.randomUUID().toString(), new ArrayList<>());
+		AuthResponseDto expectedResponse =new AuthResponseDto(new UserDto(UUID.randomUUID().toString(), inputData.getUsername(), null, null), UUID.randomUUID().toString(), new ArrayList<>());
 
 		// Define mock behaviour
-		when(authenticationService.authenticate(test)).thenReturn(expectedResponse);
+		when(authenticationService.authenticate(inputData)).thenReturn(expectedResponse);
 
 		// Make the actual call
-		AuthResponseDto actualResponse = authenticationEndpoint.authenticate(test);
+		AuthResponseDto actualResponse = authenticationEndpoint.authenticate(inputData);
+
+		// Verify dependency call
+		verify(authenticationService).authenticate(inputData);
 
 		// Check result
 		Assert.assertEquals("Should be equals",expectedResponse, actualResponse);
