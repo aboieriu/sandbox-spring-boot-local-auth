@@ -41,7 +41,7 @@ public class AuthenticationEndpointTest {
 	}
 
 	@Test
-	public void testGetUserList(){
+	public void testAuthenticate(){
 		UserAuthRequestDto inputData = new UserAuthRequestDto("aa", "bbb");
 
 		AuthResponseDto expectedResponse =new AuthResponseDto(new UserDto(UUID.randomUUID().toString(), inputData.getUsername(), null, null), UUID.randomUUID().toString(), new ArrayList<>());

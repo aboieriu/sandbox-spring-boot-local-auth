@@ -37,6 +37,8 @@ public abstract class AbstractIdentifiableEntity extends AbstractEntity {
 
 		AbstractIdentifiableEntity that = (AbstractIdentifiableEntity) o;
 
+		if (id == null && ((AbstractIdentifiableEntity) o).getId() != null) return false;
+		if (id == null && ((AbstractIdentifiableEntity) o).getId() == null) return true;
 		return id.equals(that.id);
 	}
 

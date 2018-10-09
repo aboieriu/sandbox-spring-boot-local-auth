@@ -38,6 +38,8 @@ public class UserServiceImpl implements UserService {
 	public UserDto createNewUser(NewUserRequestDto userRequestDto) {
 		User user = userAdapter.toUser(userRequestDto);
 
+		User user2 = userAdapter.toUser(userRequestDto);
+
 		// Make sure to validate user before moving forward
 		userValidator.validate(user);
 
